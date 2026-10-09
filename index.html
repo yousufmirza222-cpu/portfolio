@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loom & Luster | Fine Fabric Atelier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar">
+    <p>✂️ Complimentary fabric swatch pack on orders over $50 | Worldwide shipping available</p>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="brand-area">
+        <a href="#" class="logo">
+          <span class="logo-mark">🪡</span>
+          <span class="logo-text">Loom &amp; Luster</span>
+          <span class="logo-tag">Fabric House</span>
+        </a>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Search silk, linen, velvet, floral, color...">
+        <button id="clearSearchBtn" class="clear-btn" title="Clear search">&times;</button>
+      </div>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <button class="action-btn" id="wishlistHeaderBtn" title="Wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span class="badge" id="wishlistCount">0</span>
+        </button>
+
+        <button class="action-btn cart-trigger" id="cartOpenBtn" title="Shopping Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-5z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-total-badge" id="cartCount">0</span>
+          <span class="cart-label">Bag</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <div class="hero-text-block">
+        <span class="hero-subtitle">Couture &amp; Bespoke Textiles</span>
+        <h1 class="hero-title">Drape Your Dreams in Pure Elegance</h1>
+        <p class="hero-description">
+          Ethically sourced silks, organic French linens, plush Italian velvets, and artisanal weaves cut to order by the meter.
+        </p>
+        <div class="hero-actions">
+          <a href="#catalog" class="btn btn-primary">Browse All Fabrics</a>
+          <button class="btn btn-outline" id="swatchRequestBannerBtn">Order Swatch Samples</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-num">500+</span>
+            <span class="stat-lbl">Premium Weaves</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">100%</span>
+            <span class="stat-lbl">Natural Fibers</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">0.5m</span>
+            <span class="stat-lbl">Min. Cut Order</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visual Category Showcase -->
+  <section class="categories-section" id="categoriesSection">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kicker">Curated Collections</span>
+        <h2 class="section-title">Explore by Fabric Category</h2>
+        <p class="section-subtitle">Click any category below to immediately filter our textile collection</p>
+      </div>
+
+      <div class="category-grid" id="categoryCardsContainer">
+        <!-- Rendered via JS for easy maintenance -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Catalog & Filter Section -->
+  <section class="catalog-section" id="catalog">
+    <div class="container">
+      
+      <!-- Catalog Controls Bar -->
+      <div class="catalog-toolbar">
+        <div class="filter-pills" id="categoryPillBar">
+          <!-- Filter pills generated dynamically -->
+        </div>
+
+        <div class="sort-and-count">
+          <span class="result-count" id="resultCount">Showing 12 fabrics</span>
+          <div class="sort-wrapper">
+            <label for="sortSelect">Sort:</label>
+            <select id="sortSelect">
+              <option value="featured">Featured First</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="name">Alphabetical (A-Z)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Filters Display -->
+      <div class="active-filters-row" id="activeFiltersRow" style="display: none;">
+        <span class="filter-tag-label">Active Filter:</span>
+        <span class="filter-pill-active" id="activeFilterBadge">
+          <span id="activeFilterText">Silk</span>
+          <button id="clearActiveFilterBtn">&times;</button>
+        </span>
+      </div>
+
+      <!-- Fabric Cards Grid -->
+      <div class="fabric-grid" id="fabricGrid">
+        <!-- Populated by script.js -->
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <div class="empty-icon">🧵</div>
+        <h3>No fabrics found</h3>
+        <p>Try clearing your search or picking another category filter.</p>
+        <button class="btn btn-primary" id="resetCatalogBtn">Show All Fabrics</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Swatch Sample Kit Promo Banner -->
+  <section class="swatch-banner">
+    <div class="container swatch-box">
+      <div class="swatch-info">
+        <span class="swatch-tag">Feel Before You Sew</span>
+        <h2>Order Customized Swatch Kits</h2>
+        <p>Touch the texture, test the drape, and see the exact color undertone under your home lighting. Each sample is a generous 10cm &times; 10cm cut.</p>
+        <ul class="swatch-perks">
+          <li>✓ 5 fabric swatches of your choice</li>
+          <li>✓ Free worldwide shipping on swatch packs</li>
+          <li>✓ Includes $10 discount coupon towards your main order</li>
+        </ul>
+      </div>
+      <div class="swatch-card-cta">
+        <div class="swatch-price-badge">Only $4.99</div>
+        <p>Select any fabrics in the catalog and click <em>"Add Swatch"</em> to build your pack.</p>
+        <button class="btn btn-dark" id="openSwatchModalBtn">Order Swatch Pack</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fabric Care & Craftsmanship Guide Section -->
+  <section class="guide-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kicker">Textile Expertise</span>
+        <h2 class="section-title">The Master Weaver's Guide</h2>
+      </div>
+      <div class="guide-cards">
+        <div class="guide-card">
+          <div class="guide-icon">🌿</div>
+          <h3>100% Pure &amp; Organic</h3>
+          <p>We source traceable Mulberry silk, GOTS-certified French flax linen, and ethically raised Merino wool.</p>
+        </div>
+        <div class="guide-card">
+          <div class="guide-icon">📏</div>
+          <h3>Precision Continuous Cuts</h3>
+          <p>Your order is inspected by hand and cut continuously off the roll, ensuring no seams or breaks in your yardage.</p>
+        </div>
+        <div class="guide-card">
+          <div class="guide-icon">💧</div>
+          <h3>Colorfast Natural Dyes</h3>
+          <p>Treated with low-impact, non-toxic vegetable and eco-reactive dyes for vibrant luster that resists fading.</p>
+        </div>
+        <div class="guide-card">
+          <div class="guide-icon">✂️</div>
+          <h3>Custom Cut Increments</h3>
+          <p>Order from as little as 0.5 meters up to entire 50-meter wholesale bolts with seamless volume discounts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Reviews -->
+  <section class="reviews-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kicker">Loved by Couturiers &amp; Crafters</span>
+        <h2 class="section-title">What Designers Are Creating</h2>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"The Mulberry Silk Charmeuse has the most breathtaking liquid drape I have ever worked with. Made an evening gown for client runway, and the sheen is unmatched."</p>
+          <div class="reviewer">
+            <strong>Elena Rostova</strong>
+            <span>Bridal &amp; Eveningwear Designer</span>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"The Belgian Washed Linen is soft straight out of the package. No rough break-in period required, yet sturdy enough for heirloom summer tailoring."</p>
+          <div class="reviewer">
+            <strong>Marcus Vance</strong>
+            <span>Tailor &amp; Atelier Founder</span>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"Fast shipping, precise continuous yardage, and the sample swatches matched the full bolt color 100%. Loom & Luster is now my exclusive textile vendor."</p>
+          <div class="reviewer">
+            <strong>Sophia Chen</strong>
+            <span>Costume Designer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Signup -->
+  <section class="newsletter-section">
+    <div class="container newsletter-box">
+      <h2>Join the Atelier Club</h2>
+      <p>Receive weekly notices about rare textile mill restocks, seasonal color forecasts, and 15% off your first cut.</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="Enter your email address" required id="newsletterEmail">
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+      <p class="newsletter-note">We never spam. Unsubscribe at any time.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="logo footer-logo">
+          <span class="logo-mark">🪡</span>
+          <span class="logo-text">Loom &amp; Luster</span>
+        </div>
+        <p class="footer-bio">Purveyors of rare, luxury, and sustainable yardage fabrics for couture ateliers, tailoring houses, and passionate creators.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram">📸 Instagram</a>
+          <a href="#" aria-label="Pinterest">📌 Pinterest</a>
+          <a href="#" aria-label="YouTube">▶ YouTube</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Fabric Categories</h4>
+        <ul>
+          <li><a href="#" class="footer-cat-link" data-cat="Silk & Satin">Silk &amp; Satin</a></li>
+          <li><a href="#" class="footer-cat-link" data-cat="Linen & Cotton">Linen &amp; Cotton</a></li>
+          <li><a href="#" class="footer-cat-link" data-cat="Velvet & Brocade">Velvet &amp; Brocade</a></li>
+          <li><a href="#" class="footer-cat-link" data-cat="Wool & Cashmere">Wool &amp; Cashmere</a></li>
+          <li><a href="#" class="footer-cat-link" data-cat="Lace & Embroidery">Lace &amp; Embroidery</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Customer Atelier</h4>
+        <ul>
+          <li><a href="#swatch-box" id="footerSwatchLink">Order Swatch Cards</a></li>
+          <li><a href="#">Fabric Drape &amp; Weight Guide</a></li>
+          <li><a href="#">Yardage Calculator</a></li>
+          <li><a href="#">Care &amp; Washing Instructions</a></li>
+          <li><a href="#">Wholesale &amp; Trade Inquiries</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact &amp; Showroom</h4>
+        <p><strong>Studio:</strong> 142 Silkweaver Ave, Textile District</p>
+        <p><strong>Hours:</strong> Mon - Sat: 9:00 AM - 6:00 PM</p>
+        <p><strong>Support:</strong> concierge@loomandluster.com</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; 2026 Loom &amp; Luster Fabrics. All rights reserved. Built with pure HTML &amp; CSS.</p>
+        <p class="made-with">Crafted with passion for textiles &bull; No external backend required</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Quick View Modal -->
+  <div class="modal-backdrop" id="quickViewModal">
+    <div class="modal-dialog">
+      <button class="modal-close" id="closeModalBtn">&times;</button>
+      <div class="modal-content-grid" id="modalContent">
+        <!-- Rendered via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopping Cart Slide-over Drawer -->
+  <div class="cart-drawer-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <div class="cart-drawer-title">
+        <h3>Shopping Bag</h3>
+        <span class="cart-item-count" id="drawerItemCount">0 items</span>
+      </div>
+      <button class="cart-drawer-close" id="closeCartBtn">&times;</button>
+    </div>
+
+    <div class="cart-drawer-body" id="cartItemsContainer">
+      <!-- Items dynamically populated -->
+    </div>
+
+    <div class="cart-drawer-footer" id="cartDrawerFooter">
+      <div class="cart-summary-line">
+        <span>Subtotal</span>
+        <span class="summary-val" id="cartSubtotal">$0.00</span>
+      </div>
+      <div class="cart-shipping-tip">
+        <span>📦 Free cut-to-order packaging</span>
+      </div>
+      <button class="btn btn-primary btn-checkout" id="checkoutBtn">Proceed to Checkout</button>
+      <button class="btn btn-outline btn-clear-cart" id="clearCartBtn">Clear Bag</button>
+    </div>
+  </aside>
+
+  <!-- Swatch Kit Modal -->
+  <div class="modal-backdrop" id="swatchPackModal">
+    <div class="modal-dialog swatch-dialog">
+      <button class="modal-close" id="closeSwatchModalBtn">&times;</button>
+      <div class="swatch-modal-inner">
+        <div class="swatch-modal-header">
+          <h2>Order Your Swatch Pack ($4.99)</h2>
+          <p>Get up to 5 large 10&times;10cm fabric cuts delivered to your doorstep.</p>
+        </div>
+        <form id="swatchOrderForm">
+          <div class="form-group">
+            <label for="swatchName">Your Full Name</label>
+            <input type="text" id="swatchName" placeholder="e.g. Sarah Jenkins" required>
+          </div>
+          <div class="form-group">
+            <label for="swatchEmail">Email Address</label>
+            <input type="email" id="swatchEmail" placeholder="sarah@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="swatchAddress">Delivery Address</label>
+            <textarea id="swatchAddress" rows="2" placeholder="Street address, City, Postal Code" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Select up to 3 preferred fabric types:</label>
+            <div class="swatch-checkbox-grid">
+              <label><input type="checkbox" name="pref" value="Silk & Satin" checked> Silk &amp; Satin</label>
+              <label><input type="checkbox" name="pref" value="Linen & Cotton" checked> Linen &amp; Cotton</label>
+              <label><input type="checkbox" name="pref" value="Velvet & Brocade"> Velvet &amp; Brocade</label>
+              <label><input type="checkbox" name="pref" value="Wool & Cashmere"> Wool &amp; Cashmere</label>
+              <label><input type="checkbox" name="pref" value="Lace & Chiffon"> Lace &amp; Chiffon</label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Confirm Sample Swatch Order</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-notification" id="toastNotice">
+    <span class="toast-icon">✨</span>
+    <span class="toast-message" id="toastMessage">Item added to your bag</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
